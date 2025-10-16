@@ -6,4 +6,9 @@ class CabinaPetFriendly(Cabina): # con questa sintassi si crea una classe figlia
         self.num_animali = num_animali # aggiungo l'attributo specifico per questa sottoclasse
 
     def __str__(self):
-        pass
+        base_str = super().__str__()
+        return f"{base_str} ({self.num_animali})"
+
+    def __repr__(self):
+        base_str = super().__repr__()
+        return f"{base_str},animali={self.num_animali}"
