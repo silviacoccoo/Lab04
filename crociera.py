@@ -72,6 +72,17 @@ class Crociera:
 
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
         """Associa una cabina a un passeggero"""
+
+        # verifichiamo che la cabina e il passeggero esistano
+        if codice_cabina not in self.cabine:
+            raise ValueError("Cabina non trovato")
+        if codice_passeggero not in self.passeggeri:
+            raise ValueError("Passeggeri non trovato")
+
+        cabina=self.cabine[codice_cabina] # prendo l'oggetto cabina
+        passeggero=self.passeggeri[codice_passeggero] # prendo l'oggetto passeggero
+
+
         # TODO
 
     def cabine_ordinate_per_prezzo(self):
