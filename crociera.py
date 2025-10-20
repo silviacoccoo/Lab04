@@ -8,14 +8,16 @@ class Crociera:
     def __init__(self, nome):
         """Inizializza gli attributi e le strutture dati"""
 
-        self._nome = nome # attributo della nave
+        # inizializzo l'attributo
+        self._nome = nome
 
         # inizializzo le strutture dati
         self.cabine = {}
         self.passeggeri={}
 
     def __str__(self): # per stampare una versione leggibile
-        return f"{self.nome}"
+        return (f"{self.nome}"
+                f"{len(self.cabine)} cabine, {len(self.passeggeri)} passeggeri") # la lunghezza dei dizionari indica quante cabine e quanti passeggeri ci sono in una crociera
 
     def __repr__(self): # stamapa per il debug
         return (f"{type(self).__name__}"
@@ -49,18 +51,19 @@ class Crociera:
                                     cabina=Cabina(cod_cab, num_letti, ponte, prezzo) # creo oggetto
                                     self.cabine[cod_cab] = cabina # aggiungo al dizionario con chiave cod_cab
                                 else:
-                                    if riga[4]=='Lussuosa' or riga[4]=='Moderna' or riga[4]=='Classica':
+                                    if riga[4].isalpha(): # se tutti i caratteri sono lettere
                                         tipo=riga[4]
                                         cabina1=CabinaDeluxe(cod_cab, num_letti, ponte, prezzo, tipo)
                                         self.cabine[cod_cab] = cabina1
-                                    else:
+                                    else: # se riga[4].isnumeric()
                                         animali=int(riga[4])
                                         cabina2=CabinaPetFriendly(cod_cab, num_letti, ponte, prezzo, animali)
                                         self.cabine[cod_cab] = cabina2
-                            else:
+                            elif riga[0].startswith('P'):
                                 cod_pass=riga[0]
                                 nome=riga[1]
                                 cognome=riga[2]
+
                                 passeggero=Passeggero(cod_pass, nome, cognome) # creo oggetto passeggero
                                 self.passeggeri[cod_pass]=passeggero # aggiungo al dizionario
         except FileNotFoundError:
