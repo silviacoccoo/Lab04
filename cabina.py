@@ -2,9 +2,9 @@
 class Cabina:
     def __init__(self, cod_cab, num_letti: int, ponte, prezzo: int):
         self.cod_cab = cod_cab
-        self.num_letti = num_letti
+        self.num_letti = int(num_letti)
         self.ponte = ponte
-        self.prezzo = prezzo
+        self.prezzo = int(prezzo)
 
     def __str__(self): # metodo di visualizzazione leggibile
         return (f"Cabina {self.cod_cab}:"
