@@ -17,7 +17,7 @@ class Crociera:
         self.passeggeri={}
 
     def __str__(self): # per stampare una versione leggibile
-        return (f"{self.nome}"
+        return (f"{self.nome}: "
                 f"{len(self.cabine)} cabine, {len(self.passeggeri)} passeggeri") # la lunghezza dei dizionari indica quante cabine e quanti passeggeri ci sono in una crociera
 
     def __repr__(self): # stamapa per il debug
@@ -68,7 +68,7 @@ class Crociera:
                                 passeggero=Passeggero(cod_pass, nome, cognome) # creo oggetto passeggero
                                 self.passeggeri[cod_pass]=passeggero # aggiungo al dizionario
         except FileNotFoundError:
-            print("File non trovato")
+            raise FileNotFoundError("File non trovato")
         # TODO
 
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
@@ -76,7 +76,7 @@ class Crociera:
 
         # VERIFICHIAMO CHE CABINA E PASSEGGERO ESISTANO
         if codice_cabina not in self.cabine:
-            raise ValueError("Cabina non trovato")
+            raise ValueError("Cabina non trovata")
         if codice_passeggero not in self.passeggeri:
             raise ValueError("Passeggero non trovato")
 
@@ -91,7 +91,7 @@ class Crociera:
         if passeggero.cabina_associata is not None: # il passeggero ha una cabina associata
             raise ValueError(f'Passeggero {passeggero.cod_pass} associato alla cabina {passeggero.cabina_associata}')
 
-        # se nessuna di queste condizoni si verifica, significa che la cabina è libera e il passeggero non è associato ad alcuna cabina
+        # se nessuna di queste condizioni si verifica, significa che la cabina è libera e il passeggero non è associato ad alcuna cabina
 
         # AGGIORNAMENTO DEI VALORI
         cabina.disponibile=False
@@ -113,6 +113,7 @@ class Crociera:
     def elenca_passeggeri(self):
         """Stampa l'elenco dei passeggeri mostrando, per ognuno, la cabina a cui è associato, quando applicabile """
         for passeggero in self.passeggeri.values():
-            print(f'Passeggero {passeggero.cod_pass}, {passeggero.nome} {passeggero.cognome} è associato alla cabina {passeggero.cabina_associata}')
+            info_cabina= f"è associato alla cabina {passeggero.cabina_associata}" if passeggero.cabina_associata is not None else f"non ha cabina assegnata"
+            print(f'Il passeggero {passeggero.cod_pass}, {passeggero.nome} {passeggero.cognome} {info_cabina}')
         # TODO
 
