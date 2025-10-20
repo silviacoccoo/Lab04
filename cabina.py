@@ -1,4 +1,4 @@
-"""Creo la classe principale per la Cabina."""
+"""Creo la classe principale per la Cabina"""
 class Cabina:
     def __init__(self, cod_cab, num_letti: int, ponte, prezzo: float):
         self.cod_cab = cod_cab

@@ -1,4 +1,4 @@
-"""Creo una sottoclasse per le cabine che ammettono animali."""
+"""Creo una sottoclasse per le cabine che ammettono animali"""
 from cabina import Cabina
 class CabinaPetFriendly(Cabina): # con questa sintassi si crea una classe figlia CabinaPetFriendly della classe padre Cabina
     def __init__(self, cod_cab, num_letti, ponte, prezzo, num_animali):

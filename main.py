@@ -20,7 +20,7 @@ def main():
         if scelta == "1":
             nuovo_nome = input("Inserisci il nuovo nome della crociera: ")
             try:
-                crociera.nome=nuovo_nome # associo il nuovo nome
+                crociera.nome=nuovo_nome # associo il nuovo nome alla crociera
                 print(f'Il nuovo nome della crociera è {crociera.nome}')
             except Exception as e:
                 print(f"Si è verificata l'eccezione {e}")

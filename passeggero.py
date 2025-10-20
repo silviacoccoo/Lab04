@@ -1,4 +1,4 @@
-"""Creo la classe passeggero."""
+"""Creo la classe Passeggero"""
 class Passeggero:
     def __init__(self,cod_pass, nome, cognome):
         self.cod_pass = cod_pass
