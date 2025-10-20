@@ -46,9 +46,9 @@ class Crociera:
                                 cod_cab=riga[0]
                                 num_letti=int(riga[1])
                                 ponte=riga[2]
-                                prezzo=int(riga[3])
+                                prezzo=float(riga[3])
 
-                                if riga[4]=='<unset>':
+                                if len(riga)==4:
                                     cabina=Cabina(cod_cab, num_letti, ponte, prezzo) # creo oggetto
                                     self.cabine[cod_cab] = cabina # aggiungo al dizionario con chiave cod_cab
                                 else:
@@ -97,14 +97,14 @@ class Crociera:
         cabina.disponibile=False
 
         # associazione
-        cabina.passeggero_associata=codice_passeggero
+        cabina.passeggero_associato=codice_passeggero
         passeggero.cabina_associata=codice_cabina
         # TODO
 
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""
         lista_cabine=self.cabine.values() # creo una lista fatta dai valori associati alla chiave, ossia l'oggetto cabina
-        lista_cabine_ordinata = sorted(lista_cabine, key=lambda x: x.prezzo_finale if hasattr(x, 'prezzo_finale') else x.prezzo)
+        lista_cabine_ordinata = sorted(lista_cabine, key=lambda x: x.prezzo)
         # per le cabine standard ordino in base al prezzo, per le cabine deluxe e pet friendly ordino in base al prezzo finale
         # questo perchè quando abbiamo definito le cabine speciali, l'attributo del prezzo è prezzo_finale !!!
         return lista_cabine_ordinata

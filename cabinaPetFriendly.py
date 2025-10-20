@@ -2,9 +2,11 @@
 from cabina import Cabina
 class CabinaPetFriendly(Cabina): # con questa sintassi si crea una classe figlia CabinaPetFriendly della classe padre Cabina
     def __init__(self, cod_cab, num_letti, ponte, prezzo, num_animali):
+        prezzo_base=float(prezzo)
         prezzo_finale= prezzo*(1+0.1*num_animali)
         super().__init__(cod_cab, num_letti, ponte, prezzo_finale) # aggiungo gli attributi ereditati dalla classe padre
         self.num_animali = num_animali # aggiungo l'attributo specifico per questa sottoclasse
+        self.prezzo_base = prezzo_base
 
     def __str__(self):
         base_str = super().__str__()

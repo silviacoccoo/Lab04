@@ -4,9 +4,11 @@ from cabina import Cabina
 class CabinaDeluxe(Cabina):
     def __init__(self, cod_cab, num_letti, ponte, prezzo, tipo):
         # voglio sostituire il prezzo base con il prezzo maggiorato
-        prezzo_finale= prezzo*1.20 # definisco la variabile che contiene il prezzo maggiorato
+        prezzo_base=float(prezzo)
+        prezzo_finale= prezzo_base*1.20 # definisco la variabile che contiene il prezzo maggiorato
         super().__init__(cod_cab, num_letti, ponte, prezzo_finale) # sostituisco all'attributo prezzo della classe padre il prezzo_finale, specifico per questa sottoclasse
         self.tipo = tipo # aggiungo l'attributo tipo
+        self.prezzo_base = prezzo_base
 
     def __str__(self):
         base_str = super().__str__()
