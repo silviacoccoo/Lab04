@@ -1,3 +1,4 @@
+"""In questo file inizializzo la classe Crociera."""
 import csv
 from cabina import Cabina
 from cabinaDeluxe import CabinaDeluxe

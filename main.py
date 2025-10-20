@@ -1,4 +1,4 @@
-from crociera import Crociera
+from crociera import Crociera # importo la classe Crociera
 
 def menu():
     print(f'\n--- MENU CROCIERA ---')
