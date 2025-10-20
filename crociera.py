@@ -73,24 +73,45 @@ class Crociera:
     def assegna_passeggero_a_cabina(self, codice_cabina, codice_passeggero):
         """Associa una cabina a un passeggero"""
 
-        # verifichiamo che la cabina e il passeggero esistano
+        # VERIFICHIAMO CHE CABINA E PASSEGGERO ESISTANO
         if codice_cabina not in self.cabine:
             raise ValueError("Cabina non trovato")
         if codice_passeggero not in self.passeggeri:
-            raise ValueError("Passeggeri non trovato")
+            raise ValueError("Passeggero non trovato")
 
         cabina=self.cabine[codice_cabina] # prendo l'oggetto cabina
         passeggero=self.passeggeri[codice_passeggero] # prendo l'oggetto passeggero
 
+        # VERIFICA DELLA CABINA: la cabina è gia occupata?
+        if not cabina.disponibile: # se è False, cioè è gia occupata
+            raise ValueError(f"Cabina {cabina.cod_cab} già occupata")
 
+        # VERIFICA DEL PASSEGGERO: è già associato a una cabina?
+        if passeggero.cabina_associata is not None: # il passeggero ha una cabina associata
+            raise ValueError(f'Passeggero {passeggero.cod_pass} associato alla cabina {passeggero.cabina_associata}')
+
+        # se nessuna di queste condizoni si verifica, significa che la cabina è libera e il passeggero non è associato ad alcuna cabina
+
+        # AGGIORNAMENTO DEI VALORI
+        cabina.disponibile=False
+
+        # associazione
+        cabina.passeggero_associata=codice_passeggero
+        passeggero.cabina_associata=codice_cabina
         # TODO
 
     def cabine_ordinate_per_prezzo(self):
         """Restituisce la lista ordinata delle cabine in base al prezzo"""
+        lista_cabine=self.cabine.values() # creo una lista fatta dai valori associati alla chiave, ossia l'oggetto cabina
+        lista_cabine_ordinata = sorted(lista_cabine, key=lambda x: x.prezzo_finale if hasattr(x, 'prezzo_finale') else x.prezzo)
+        # per le cabine standard ordino in base al prezzo, per le cabine deluxe e pet friendly ordino in base al prezzo finale
+        # questo perchè quando abbiamo definito le cabine speciali, l'attributo del prezzo è prezzo_finale !!!
+        return lista_cabine_ordinata
         # TODO
-
 
     def elenca_passeggeri(self):
         """Stampa l'elenco dei passeggeri mostrando, per ognuno, la cabina a cui è associato, quando applicabile """
+        for passeggero in self.passeggeri.values():
+            print(f'Passeggero {passeggero.cod_pass}, {passeggero.nome} {passeggero.cognome} è associato alla cabina {passeggero.cabina_associata}')
         # TODO
 
